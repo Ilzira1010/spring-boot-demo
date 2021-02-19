@@ -10,13 +10,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class UserDto {
-    private Long id;
+    private long id;
     private String email;
     private String nickname;
+
     public static UserDto from(User user) {
         return UserDto.builder()
                 .id(user.getId())

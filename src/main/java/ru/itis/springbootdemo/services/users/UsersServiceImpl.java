@@ -1,12 +1,13 @@
-package ru.itis.springbootdemo.services;
+package ru.itis.springbootdemo.services.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.itis.springbootdemo.dto.UserDto;
-import ru.itis.springbootdemo.dto.UserForm;
+import ru.itis.springbootdemo.dto.SignUpForm;
 import ru.itis.springbootdemo.models.User;
 import ru.itis.springbootdemo.repositories.UsersRepository;
+import ru.itis.springbootdemo.services.users.UsersService;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,12 +34,12 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public UserDto addUser(UserForm userForm) {
+    public UserDto addUser(SignUpForm signUpForm) {
         User user = User.builder()
-                .id(userForm.getId())
-                .nickname(userForm.getNickname())
-                .email(userForm.getEmail())
-                .hashPassword((passwordEncoder.encode(userForm.getHashPassword())))
+//                .id(userForm.getId())
+                .nickname(signUpForm.getNickname())
+                .email(signUpForm.getEmail())
+                .hashPassword((passwordEncoder.encode(signUpForm.getPassword())))
                 .build();
         usersRepository.save(user);
         return from(user);

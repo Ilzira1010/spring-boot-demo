@@ -5,10 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.itis.springbootdemo.dto.SignUpForm;
 import ru.itis.springbootdemo.dto.UserDto;
-import ru.itis.springbootdemo.dto.UserForm;
-import ru.itis.springbootdemo.repositories.UsersRepository;
-import ru.itis.springbootdemo.services.UsersService;
+
+import ru.itis.springbootdemo.services.users.UsersService;
+
 
 @Controller
 public class UsersController {
@@ -31,7 +32,7 @@ public class UsersController {
 
     @PostMapping("/users")
     @ResponseBody
-    public ResponseEntity<UserDto> addUser(@RequestBody UserForm userForm) {
+    public ResponseEntity<UserDto> addUser(@RequestBody SignUpForm userForm) {
         return ResponseEntity.ok(usersService.addUser(userForm));
     }
 }
