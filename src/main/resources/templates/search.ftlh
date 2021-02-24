@@ -23,7 +23,7 @@
                     <a class="nav-link" href="<c:url value='/profile/'>">My profile</a>
                 </li>
             </ul>
-            <:if test="${user == null}">
+            <:if test="user == null">
                 <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='<c:url value=/signIn/>'">Sign In</button>
                 <button class="btn btn-primary my-2 my-sm-0 ml-3 mr-3" onclick="location.href='<c:url value=/signUp/>'">Sign Up</button>
             </:if>
@@ -38,8 +38,8 @@
                    aria-label="Search">
             <select class="form-control mx-3" name="category">
                 <option value="0" selected>---</option>
-                <:forEach items="${categories}" var="c">
-                    <option value="${c.getId()}">${c.getName()}</option>
+                <:forEach items="categories" var="c">
+                    <option value="c.getId()">c.getName()</option>
                 </:forEach>
             </select>
             <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>

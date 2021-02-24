@@ -1,21 +1,28 @@
-//package ru.itis.springbootdemo.services.podcast;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Component;
-//import ru.itis.springbootdemo.dto.UserDto;
-//import ru.itis.springbootdemo.models.Category;
-//import ru.itis.springbootdemo.models.Podcast;
-//import ru.itis.springbootdemo.models.User;
-//import ru.itis.springbootdemo.repositories.PodcastRepository;
-//
-//import java.util.List;
-//import java.util.Optional;
-//@Component
-//public class PodcastServiceImpl implements PodcastService {
-//
-//    @Autowired
-//    private final PodcastRepository podcastRepository;
-//
+package ru.itis.springbootdemo.services.podcast;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import ru.itis.springbootdemo.dto.PodcastDto;
+import ru.itis.springbootdemo.dto.UserDto;
+import ru.itis.springbootdemo.models.Category;
+import ru.itis.springbootdemo.models.Podcast;
+import ru.itis.springbootdemo.models.User;
+import ru.itis.springbootdemo.repositories.PodcastRepository;
+
+import java.util.List;
+import java.util.Optional;
+@Component
+public class PodcastServiceImpl implements PodcastService {
+
+    @Autowired
+    private PodcastRepository podcastRepository;
+
+@Override
+public List<PodcastDto> getPodcastBySearchAndCategory(String search, Category category) {
+//        return podcastRepository.findByCategory(search, category);
+    List<Podcast> podcast = podcastRepository.findAllBySearchAndCategory(search, category);
+        return PodcastDto.from(podcast);
+        }
 //    public PodcastServiceImpl(PodcastRepository podcastRepository) {
 //        this.podcastRepository = podcastRepository;
 //    }
@@ -36,10 +43,6 @@
 //        return podcastRepository.find(search);
 //    }
 //
-//    @Override
-//    public List<Podcast> findByCategory(String search, Category category) {
-//        return podcastRepository.findByCategory(search, category);
-//    }
 //
 //    @Override
 //    public Optional<Podcast> getById(long id) {
@@ -60,4 +63,4 @@
 //    public void update(Podcast podcast, long id) {
 //        podcastRepository.updateById(podcast, id);
 //    }
-//}
+}
