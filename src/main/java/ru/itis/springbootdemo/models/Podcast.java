@@ -13,15 +13,25 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Entity
+//@SuppressWarnings("JpaAttributeTypeInspection")
 @Table(name ="podcasts")
 public class Podcast {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     private String title;
     private String img;
     private String track;
     private Date created_at;
-//    private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+//    private String search;
 }

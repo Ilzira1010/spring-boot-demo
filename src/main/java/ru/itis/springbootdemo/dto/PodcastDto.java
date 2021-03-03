@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.itis.springbootdemo.models.Category;
 import ru.itis.springbootdemo.models.Podcast;
 
 import java.util.List;
@@ -17,12 +18,16 @@ import java.util.stream.Collectors;
 
 public class PodcastDto {
     private Long id;
-    private String title;
+    private String search;
+    private Category category;
+//    private String title;
 
     public static PodcastDto from(Podcast podcast) {
         return PodcastDto.builder()
                 .id(podcast.getId())
-                .title(podcast.getTitle())
+//                .search(podcast.getSearch())
+                .category(podcast.getCategory())
+//                .title(podcast.getTitle())
                 .build();
     }
     public static List<PodcastDto> from(List<Podcast> podcast) {

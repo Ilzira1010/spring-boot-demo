@@ -9,5 +9,7 @@ import java.util.List;
 
 @Repository
 public interface PodcastRepository extends JpaRepository<Podcast, Long> {
-    List<Podcast> findAllBySearchAndCategory(String search, Category category);
+    List<Podcast> findAllByTitleStartsWithAndCategory(String search, Category category);
+    List<Podcast> findAllByTitleStartsWith(String search);
+    List<Podcast> findAllByCategory(Category category);
 }

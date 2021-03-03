@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,27 +21,27 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/profile">My profile</a>
+                    <a class="nav-link" href="/profile">">My profile</a>
                 </li>
             </ul>
-            <:if test="user == null">
+            <c:if test="${user == null}">
                 <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/signIn'">Sign In</button>
-                <button class="btn btn-primary my-2 my-sm-0 ml-3 mr-3" onclick="location.href='/signUp'">>Sign Up</button>
-            </:if>
-            <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/search'">Search</button>
+                <button class="btn btn-primary my-2 my-sm-0 ml-3 mr-3" onclick="location.href='/signUp'">Sign Up</button>
+            </c:if>
+            <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/podcasts'">Search</button>
         </div>
     </nav>
 </header>
 <main>
     <div class="container">
-        <form action="/search" method="get" id='search_form' class="form-inline my-2 w-100">
+        <form action="/podcasts" method="get" id='search_form' class="form-inline my-2 w-100">
             <input name="search" class="form-control mr-sm-2 ml-3 w-75" id='inputSearch' type="search" placeholder="Search"
                    aria-label="Search">
             <select class="form-control mx-3" name="category">
                 <option value="0" selected>---</option>
-                <:forEach items="categories" var="c">
-                    <option value="c.getId()">c.getName()</option>
-                </:forEach>
+                <c:forEach items="${categories}" var="c">
+                    <option value="${c.getId()}">${c.getName()}</option>
+                </c:forEach>
             </select>
             <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
         </form>

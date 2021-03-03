@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Builder
@@ -20,6 +21,9 @@ public class User {
     private String nickname;
     private String email;
     private String hashPassword;
+
+    @OneToMany(mappedBy = "user")
+    private List<Podcast> podcasts;
 
 }
 
