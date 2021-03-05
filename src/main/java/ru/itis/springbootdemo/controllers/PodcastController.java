@@ -22,18 +22,21 @@ public class PodcastController {
 
     @GetMapping("/podcasts")
     public String getPodcastsPage(Model model) {
-        model.addAllAttributes("categories", categoryService.getAll());
+        //здесь была ошибка. Если использовать метод addAllAtributes, нужно использовать словарь для передачи атрибутов,
+        //для передачи в модель одного атрибута испозьзуется addAtribute
+        model.addAttribute("categories", categoryService.getAll());
         return "podcasts";
     }
 
+    //!= null заменен на !isEmpty
     @GetMapping("/podcasts/{search}/{category}")
     @ResponseBody
     public ResponseEntity<List<PodcastDto>> getPodcasts(@PathVariable("search") String search, @PathVariable("category") String category) {
-        if (search != null && category != null) {
+        if (!search.isEmpty() && !category.isEmpty()) {
             return ResponseEntity.ok(podcastService.getPodcastBySearchAndCategory(search, category));
-        } else if (search != null) {
+        } else if (!search.isEmpty()) {
             return ResponseEntity.ok(podcastService.getPodcastBySearch(search));
-        } else if (category !=null) {
+        } else if (!category.isEmpty()) {
             return ResponseEntity.ok(podcastService.getPodcastByCategory(category));
         }
         return null;
@@ -42,7 +45,7 @@ public class PodcastController {
     @PostMapping("/podcasts")
     @ResponseBody
     public ResponseEntity<List<PodcastDto>> postPodcast(@RequestBody PodcastDtoForRequest podcastDto) {
-        return getPodcasts(podcastDto.getSearch(), podcastDto.getCategory().getName());
+        return getPodcasts(podcastDto.getTitle(), podcastDto.getCategory());
     }
 
 }

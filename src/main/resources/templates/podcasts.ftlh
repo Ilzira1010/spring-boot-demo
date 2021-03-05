@@ -24,10 +24,12 @@
                     <a class="nav-link" href="/profile">">My profile</a>
                 </li>
             </ul>
-            <c:if test="${user == null}">
+            <#-- пришлось закомментировать этот код, т.к. вход еще не написан (это будет на ближайших парах)
+            Вернуть эту часть, когда юзер, который заходит, будет сохраняться в сессиях -->
+            <#--<c:if test="${user == null}">
                 <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/signIn'">Sign In</button>
                 <button class="btn btn-primary my-2 my-sm-0 ml-3 mr-3" onclick="location.href='/signUp'">Sign Up</button>
-            </c:if>
+            </c:if>-->
             <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/podcasts'">Search</button>
         </div>
     </nav>
@@ -39,9 +41,13 @@
                    aria-label="Search">
             <select class="form-control mx-3" name="category">
                 <option value="0" selected>---</option>
-                <c:forEach items="${categories}" var="c">
+                <#-- Списки в ftlh (free marker) оформляются так -->
+                <#list categories as c>
                     <option value="${c.getId()}">${c.getName()}</option>
-                </c:forEach>
+                </#list>
+                <#--<c:forEach items="${categories}" var="c">
+                    <option value="${c.getId()}">${c.getName()}</option>
+                </c:forEach> -->
             </select>
             <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
         </form>

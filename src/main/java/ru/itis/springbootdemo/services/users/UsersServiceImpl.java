@@ -19,8 +19,8 @@ public class UsersServiceImpl implements UsersService {
     @Autowired
     private UsersRepository usersRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserDto> getAllUsers() {
@@ -39,7 +39,7 @@ public class UsersServiceImpl implements UsersService {
 //                .id(userForm.getId())
                 .nickname(signUpForm.getNickname())
                 .email(signUpForm.getEmail())
-                .hashPassword((passwordEncoder.encode(signUpForm.getPassword())))
+//                .hashPassword((passwordEncoder.encode(signUpForm.getPassword())))
                 .build();
         usersRepository.save(user);
         return from(user);

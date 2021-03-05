@@ -11,15 +11,15 @@ import ru.itis.springbootdemo.repositories.UsersRepository;
 public class SignUpServiceImpl implements SignUpService{
     @Autowired
     private UsersRepository usersRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @Override
     public boolean signUp(SignUpForm form) {
         User user = User.builder()
                 .nickname(form.getNickname())
                 .email(form.getEmail())
-                .hashPassword(passwordEncoder.encode(form.getPassword()))
+//                .hashPassword(passwordEncoder.encode(form.getPassword()))
                 .build();
          usersRepository.save(user);
          return true;

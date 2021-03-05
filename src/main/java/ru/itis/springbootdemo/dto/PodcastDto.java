@@ -18,16 +18,14 @@ import java.util.stream.Collectors;
 
 public class PodcastDto {
     private Long id;
-    private String search;
     private Category category;
-//    private String title;
-
+    private String title;
+    
     public static PodcastDto from(Podcast podcast) {
         return PodcastDto.builder()
                 .id(podcast.getId())
-//                .search(podcast.getSearch())
                 .category(podcast.getCategory())
-//                .title(podcast.getTitle())
+                .title(podcast.getTitle())
                 .build();
     }
     public static List<PodcastDto> from(List<Podcast> podcast) {

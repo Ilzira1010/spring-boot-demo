@@ -22,8 +22,5 @@ public class User {
     private String email;
     private String hashPassword;
 
-    @OneToMany(mappedBy = "user")
-    private List<Podcast> podcasts;
-
 }
 

@@ -13,7 +13,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Entity
-//@SuppressWarnings("JpaAttributeTypeInspection")
 @Table(name ="podcasts")
 public class Podcast {
     @Id

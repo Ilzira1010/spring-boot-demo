@@ -33,7 +33,7 @@ public class PodcastServiceImpl implements PodcastService {
 
     @Override
     public List<PodcastDto> getPodcastByCategory(String category) {
-        List<Podcast> podcast = podcastRepository.findAllByCategory(categoryRepository.findByName(category).get());
+        List<Podcast> podcast = podcastRepository.findAllByCategory(categoryRepository.findById(Long.parseLong(category)).get());
         return PodcastDto.from(podcast);
     }
 }
