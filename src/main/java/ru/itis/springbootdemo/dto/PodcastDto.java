@@ -20,7 +20,7 @@ public class PodcastDto {
     private Long id;
     private Category category;
     private String title;
-    
+
     public static PodcastDto from(Podcast podcast) {
         return PodcastDto.builder()
                 .id(podcast.getId())

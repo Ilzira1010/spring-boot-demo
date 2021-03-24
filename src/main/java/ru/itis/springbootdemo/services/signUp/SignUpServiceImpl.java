@@ -4,24 +4,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.itis.springbootdemo.dto.SignUpForm;
+import ru.itis.springbootdemo.models.State;
 import ru.itis.springbootdemo.models.User;
 import ru.itis.springbootdemo.repositories.UsersRepository;
+import ru.itis.springbootdemo.services.mail.MailsService;
+
+import java.util.UUID;
 
 @Component
 public class SignUpServiceImpl implements SignUpService{
     @Autowired
     private UsersRepository usersRepository;
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private MailsService mailsService;
 
     @Override
     public boolean signUp(SignUpForm form) {
-        User user = User.builder()
+        User newUser = User.builder()
                 .nickname(form.getNickname())
                 .email(form.getEmail())
-//                .hashPassword(passwordEncoder.encode(form.getPassword()))
+                .hashPassword(passwordEncoder.encode(form.getPassword()))
+                .state(State.NOT_CONFIRMED)
+                .confirmCode(UUID.randomUUID().toString())
                 .build();
-         usersRepository.save(user);
+         usersRepository.save(newUser);
+
+         mailsService.sendEmailForConfirm(newUser.getEmail(), newUser.getConfirmCode());
          return true;
     }
 }

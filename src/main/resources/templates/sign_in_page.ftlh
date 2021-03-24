@@ -18,12 +18,15 @@
 <#--                            String error = (String) request.getAttribute("error");-->
 <#--                            if (error != null) {-->
 <#--                            %>-->
-<#--                            <div class="alert alert-danger fade show" role="alert">-->
+                            <#if RequestParameters.error??>
+                            <div class="alert alert-danger fade show" role="alert">
 <#--                                <%=error%>-->
-<#--                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
-<#--                                    <span aria-hidden="true">&times;</span>-->
-<#--                                </button>-->
-<#--                            </div>-->
+                                <strong>error</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            </#if>
 <#--                            <%-->
 <#--                            }-->
 <#--                            %>-->

@@ -22,13 +22,10 @@ public class PodcastController {
 
     @GetMapping("/podcasts")
     public String getPodcastsPage(Model model) {
-        //здесь была ошибка. Если использовать метод addAllAtributes, нужно использовать словарь для передачи атрибутов,
-        //для передачи в модель одного атрибута испозьзуется addAtribute
         model.addAttribute("categories", categoryService.getAll());
         return "podcasts";
     }
 
-    //!= null заменен на !isEmpty
     @GetMapping("/podcasts/{search}/{category}")
     @ResponseBody
     public ResponseEntity<List<PodcastDto>> getPodcasts(@PathVariable("search") String search, @PathVariable("category") String category) {

@@ -2,6 +2,7 @@ package ru.itis.springbootdemo.services.podcast;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.itis.springbootdemo.dto.CategoryDto;
 import ru.itis.springbootdemo.dto.PodcastDto;
 import ru.itis.springbootdemo.models.Category;
 import ru.itis.springbootdemo.models.Podcast;
@@ -35,6 +36,12 @@ public class PodcastServiceImpl implements PodcastService {
     public List<PodcastDto> getPodcastByCategory(String category) {
         List<Podcast> podcast = podcastRepository.findAllByCategory(categoryRepository.findById(Long.parseLong(category)).get());
         return PodcastDto.from(podcast);
+    }
+
+    //im
+    @Override
+    public List<PodcastDto> getAll() {
+        return PodcastDto.from(podcastRepository.findAll());
     }
 }
 

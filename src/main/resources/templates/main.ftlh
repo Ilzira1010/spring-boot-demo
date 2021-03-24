@@ -5,8 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <title>Main</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <title>Profile</title>
 </head>
 <body>
 <header>
@@ -23,45 +23,38 @@
                     <a class="nav-link" href="/profile">My profile</a>
                 </li>
             </ul>
-<#--            <#if test="${user == null}">-->
-<#--                <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/signIn'">Sign In</button>-->
-<#--                <button class="btn btn-primary my-2 my-sm-0 ml-3 mr-3" onclick="location.href='/signUp'">Sign Up</button>-->
-<#--            </#if>-->
+<#--            <c:if test="${user == null}">-->
+<#--                <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='<c:url value="/signIn"/>'">Sign In</button>-->
+<#--                <button class="btn btn-primary my-2 my-sm-0 ml-3 mr-3" onclick="location.href='<c:url value="/signUp"/>'">Sign Up</button>-->
+<#--            </c:if>-->
             <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/podcasts'">Search</button>
         </div>
     </nav>
 </header>
 <main>
-    <button class="btn btn-primary m-3" onclick="location.href='/create'">Create Podcast</button>
-    <button class="btn btn-primary m-3" onclick="location.href='/quit'">Sign Out</button>
     <div class="container">
-        <h2 class="text-center">My Podcasts</h2>
         <#list podcasts as p>
             <div class="card container m-3">
                 <div class="row">
-                    <div class="col-lg-3 p-0">
-                        <img class="card-img-top img-fluid" src="/img?name=${p.getImg()}" alt="Image of podcast">
-                    </div>
+<#--                    <div class="col-lg-3 p-0">-->
+<#--                        <img class="card-img-top img-fluid" src="/img?name=${p.getImg()}" alt="Image of podcast">-->
+<#--                    </div>-->
                     <div class="col-lg-9">
                         <div class="card-body">
                             <h2 class="card-text podcast-title title">${p.getTitle()}</h2>
                             <h3 class="card-text podcast-title category">Category: <span>${p.getCategory().getName()}</span></h3>
                         </div>
                         <div class="card-body">
-                            <p class="card-text">${p.getUser().getNickname()} / ${p.getCreated_at()}</p>
+<#--                            <p class="card-text">${p.getUser().getNickname()} / ${p.getCreated_at()}</p>-->
                             <div class="container-audio">
-                                <audio controls preload="auto" id="audio">
-                                    <source src="/track?name=${p.getTrack()}" type="audio/ogg">
-                                    Your browser dose not Support the audio Tag
-                                </audio>
+<#--                                <audio controls preload="auto" id="audio">-->
+<#--                                    <source src="/track?name=${p.getTrack()}" type="audio/ogg">-->
+<#--                                    Your browser dose not Support the audio Tag-->
+<#--                                </audio>-->
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="button-container mb-2 w-50 ml-2">
-                <a class="btn btn-success mx-2 w-25" href='/edit?id=${p.getId()}'>Edit</a>
-                <a class="btn btn-danger mx-2 w-25" href='/delete?id=${p.getId()}'>Delete</a>
             </div>
         </#list>
     </div>
@@ -96,5 +89,3 @@
 <script src="/js/bootstrap.bundle.js"></script>
 </body>
 </html>
-
-
