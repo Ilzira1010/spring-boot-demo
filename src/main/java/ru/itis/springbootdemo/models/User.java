@@ -20,6 +20,7 @@ public class User {
     private String nickname;
     private String email;
     private String hashPassword;
+    private String phone;
 
     @Enumerated(value = EnumType.STRING)
     private State state;

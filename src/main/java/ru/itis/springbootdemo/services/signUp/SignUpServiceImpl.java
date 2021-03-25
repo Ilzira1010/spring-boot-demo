@@ -8,6 +8,7 @@ import ru.itis.springbootdemo.models.State;
 import ru.itis.springbootdemo.models.User;
 import ru.itis.springbootdemo.repositories.UsersRepository;
 import ru.itis.springbootdemo.services.mail.MailsService;
+import ru.itis.springbootdemo.services.sms.SmsService;
 
 import java.util.UUID;
 
@@ -21,6 +22,9 @@ public class SignUpServiceImpl implements SignUpService{
     @Autowired
     private MailsService mailsService;
 
+    @Autowired
+    private SmsService smsService;
+
     @Override
     public boolean signUp(SignUpForm form) {
         User newUser = User.builder()
@@ -31,6 +35,7 @@ public class SignUpServiceImpl implements SignUpService{
                 .confirmCode(UUID.randomUUID().toString())
                 .build();
          usersRepository.save(newUser);
+         smsService.sendSms(form.getPhone(), "Вы зарегистрированы!");
 
          mailsService.sendEmailForConfirm(newUser.getEmail(), newUser.getConfirmCode());
          return true;

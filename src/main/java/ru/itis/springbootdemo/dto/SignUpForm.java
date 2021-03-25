@@ -7,5 +7,6 @@ public class SignUpForm {
     private String nickname;
     private String email;
     private String password;
+    private String phone;
 }
 

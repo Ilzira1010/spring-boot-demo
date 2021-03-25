@@ -35,7 +35,12 @@
                                 <div class="form-group">
                                     <span class="text-black-50">Email</span>
                                     <input id="email-signup" type="email" data-verify="email" class="form-control"
-                                           name="email"
+                                           name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <span class="text-black-50">Phone</span>
+                                    <input id="phone-signup" type="text" data-verify="phone" class="form-control"
+                                           name="phone"
                                            required>
                                 </div>
                                 <div class="form-group">
