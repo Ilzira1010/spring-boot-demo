@@ -2,8 +2,8 @@ package ru.itis.springbootdemo.security.details;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import org.springframework.security.core.userdetails.UserDetails;
+import ru.itis.springbootdemo.models.State;
 import ru.itis.springbootdemo.models.User;
 
 import java.util.Collection;
@@ -17,9 +17,9 @@ public class UserDetailsImpl implements UserDetails {
         this.user = user;
     }
 
-    //какие права есть у пользователя = роль
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return Collections.singleton(new SimpleGrantedAuthority(user.getRole().toString()));
         return Collections.singletonList(new SimpleGrantedAuthority("USER"));
     }
 
@@ -50,6 +50,6 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return user.getState().equals(State.NOT_CONFIRMED);
     }
 }

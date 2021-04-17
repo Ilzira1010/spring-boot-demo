@@ -1,9 +1,6 @@
 package ru.itis.springbootdemo.services.mail;
 
-import freemarker.template.Configuration;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
-import freemarker.template.TemplateExceptionHandler;
+import freemarker.template.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassRelativeResourceLoader;
@@ -22,17 +19,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-
 @Component
 public class MailsServiceImpl implements MailsService {
 
-    private final Template confirmMailTemplate;
     @Autowired
     private JavaMailSender javaMailSender;
+
     @Autowired
     private UsersRepository usersRepository;
+
     @Value("${spring.mail.username}")
     private String mailFrom;
+
+    private final Template confirmMailTemplate;
 
     public MailsServiceImpl() {
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_30);
@@ -42,12 +41,11 @@ public class MailsServiceImpl implements MailsService {
                         "/"));
         configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         try {
-            this.confirmMailTemplate = configuration.getTemplate("mail/confirm_mail.ftlh");
+            this.confirmMailTemplate =configuration.getTemplate("mail/confirm_mail.ftlh");
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
     }
-
     @Override
     public void sendEmailForConfirm(String email, String code) {
         String mailText = getEmailText(code);
@@ -85,16 +83,26 @@ public class MailsServiceImpl implements MailsService {
     }
 
     @Override
-    public void findUserByCode(String code) {
-        Optional<User> confirmCode = usersRepository.findByConfirmCode(code);
-        User user = User.builder()
-                .id(confirmCode.get().getId())
-                .nickname(confirmCode.get().getNickname())
-                .email(confirmCode.get().getEmail())
-                .hashPassword(confirmCode.get().getHashPassword())
-                .state(State.CONFIRMED)
-                .confirmCode(code)
-                .build();
-        usersRepository.save(user);
+    public Boolean isConfirmed(String code){
+        Optional<User> user = usersRepository.findByConfirmCode(code);
+        if (user.isPresent()) {
+            user.get().setConfirmCode(code);
+            usersRepository.save(user.get());
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
     }
+//    @Override
+//    public void findUserByCode(String code) {
+//        Optional<User> confirmCode = usersRepository.findByConfirmCode(code);
+//        User user = User.builder()
+//                .id(confirmCode.get().getId())
+//                .nickname(confirmCode.get().getNickname())
+//                .email(confirmCode.get().getEmail())
+//                .hashPassword(confirmCode.get().getHashPassword())
+//                .phone(confirmCode.get().getPhone())
+//                .state(State.CONFIRMED)
+//                .build();
+//        usersRepository.save(user);
+//    }
 }

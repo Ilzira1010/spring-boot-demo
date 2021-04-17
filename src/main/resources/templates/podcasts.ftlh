@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,7 +20,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/profile">">My profile</a>
+                    <a class="nav-link" href="/profile">My profile</a>
                 </li>
             </ul>
             <#-- пришлось закомментировать этот код, т.к. вход еще не написан (это будет на ближайших парах)

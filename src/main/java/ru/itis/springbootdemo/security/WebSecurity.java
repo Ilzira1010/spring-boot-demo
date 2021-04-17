@@ -1,5 +1,6 @@
 //package ru.itis.springbootdemo.security;
 //
+//
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.beans.factory.annotation.Qualifier;
 //import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -23,7 +24,9 @@
 //        http.csrf().disable();
 //        http.authorizeRequests()
 //                .antMatchers("/signUp").permitAll() // доступна всем
-//                .antMatchers("/profile").authenticated() // только аутентифицирован
+//                .antMatchers("/papers/**").permitAll()
+//                .antMatchers("/profile").authenticated()
+//                .antMatchers("/files/**").permitAll()// только аутентифицирован
 //                .and()
 //                .formLogin() // описываем страницу входа
 //                .loginPage("/signIn") //наша страница входа расположена по указанному адресу
@@ -37,4 +40,3 @@
 //        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
 //    }
 //}
-//

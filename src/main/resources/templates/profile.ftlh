@@ -33,7 +33,7 @@
 </header>
 <main>
     <button class="btn btn-primary m-3" onclick="location.href='/create'">Create Podcast</button>
-    <button class="btn btn-primary m-3" onclick="location.href='/quit'">Sign Out</button>
+    <button class="btn btn-primary m-3" onclick="location.href='/main'">Sign Out</button> <#-- название локейшена из /quit в /main-->
     <div class="container">
         <h2 class="text-center">My Podcasts</h2>
         <#list podcasts as p>

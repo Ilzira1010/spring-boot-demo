@@ -10,13 +10,13 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class SpringBootDemoApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(SpringBootDemoApplication.class, args);
-    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootDemoApplication.class, args);
     }
 
     @Bean

@@ -25,7 +25,9 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private State state;
 
-    private String confirmCode;
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
-}
+    private String confirmCode;
+   }
 

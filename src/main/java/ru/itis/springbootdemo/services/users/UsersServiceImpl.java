@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.itis.springbootdemo.dto.UserDto;
 import ru.itis.springbootdemo.dto.SignUpForm;
+import ru.itis.springbootdemo.models.Role;
 import ru.itis.springbootdemo.models.User;
 import ru.itis.springbootdemo.repositories.UsersRepository;
 import ru.itis.springbootdemo.services.users.UsersService;
@@ -40,6 +41,7 @@ public class UsersServiceImpl implements UsersService {
                 .nickname(signUpForm.getNickname())
                 .email(signUpForm.getEmail())
 //                .hashPassword((passwordEncoder.encode(signUpForm.getPassword())))
+                .role(Role.USER)
                 .build();
         usersRepository.save(user);
         return from(user);

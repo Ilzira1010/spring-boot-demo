@@ -23,10 +23,9 @@
                     <a class="nav-link" href="/profile">My profile</a>
                 </li>
             </ul>
-<#--            <c:if test="${user == null}">-->
-<#--                <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='<c:url value="/signIn"/>'">Sign In</button>-->
-<#--                <button class="btn btn-primary my-2 my-sm-0 ml-3 mr-3" onclick="location.href='<c:url value="/signUp"/>'">Sign Up</button>-->
-<#--            </c:if>-->
+<#--            <#if test="${user == null}">-->
+                <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/signIn'">Sign In</button>
+                <button class="btn btn-primary my-2 my-sm-0 ml-3 mr-3" onclick="location.href='/signUp'">Sign Up</button>
             <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/podcasts'">Search</button>
         </div>
     </nav>

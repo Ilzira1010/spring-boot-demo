@@ -2,29 +2,26 @@ package ru.itis.springbootdemo.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-/**
- * 01.03.2021
- * 08. spring-boot-demo
- *
- * @author Sidikov Marsel (First Software Engineering Platform)
- * @version v1.0
- */
+
 @EnableWebSecurity
+//@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     @Qualifier("customUserDetailsService")
     private UserDetailsService userDetailsService;
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -37,7 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/signUp").permitAll()
                 .antMatchers("/papers/search/**").permitAll()
-                .antMatchers("/**").authenticated()
+                .antMatchers("/**").permitAll()
+//               .antMatchers("/**").authenticated()
+//                .antMatchers("/**").authenticated()
                 .antMatchers("/users").hasAnyAuthority("ADMIN")
                 .antMatchers("/profile").authenticated()
                 .and()
@@ -45,7 +44,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/signIn")
                 .usernameParameter("email")
                 .defaultSuccessUrl("/profile")
-                .failureUrl("/signIn?error")
-                .permitAll();
+
+                .failureUrl("/signIn?error").permitAll();
+//                   .and()
+//                   .logout()
+//                   .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+//                   .invalidateHttpSession(true)
+
+//                   .deleteCookies("JSESSIONID");
+
     }
 }
