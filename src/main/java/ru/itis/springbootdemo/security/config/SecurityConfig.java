@@ -13,7 +13,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @EnableWebSecurity
-//@Configuration
+@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -33,17 +33,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/signUp").permitAll()
+                .antMatchers("/img/*").permitAll()
+                .antMatchers("/track/*").permitAll()
+                .antMatchers("/edit/*").authenticated()
+                .antMatchers("/delete/*").authenticated()
                 .antMatchers("/papers/search/**").permitAll()
-                .antMatchers("/**").permitAll()
+                .antMatchers("main").permitAll()
+                .antMatchers("/podcast").permitAll()
+                .antMatchers("/podcast_specific").permitAll()
 //               .antMatchers("/**").authenticated()
-//                .antMatchers("/**").authenticated()
-                .antMatchers("/users").hasAnyAuthority("ADMIN")
+                .antMatchers("/users").permitAll()
                 .antMatchers("/profile").authenticated()
+//                .antMatchers("/profile").permitAll()
+                .antMatchers("/create").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/signIn")
                 .usernameParameter("email")
-                .defaultSuccessUrl("/profile")
+                .defaultSuccessUrl("/profile", true)
 
                 .failureUrl("/signIn?error").permitAll();
 //                   .and()

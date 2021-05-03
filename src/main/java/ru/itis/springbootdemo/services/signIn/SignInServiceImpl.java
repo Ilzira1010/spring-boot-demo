@@ -18,11 +18,6 @@ public class SignInServiceImpl implements SignInService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-//    public SignInServiceImpl(UsersRepository usersRepository){
-//        this.usersRepository = usersRepository;
-//        this.passwordEncoder = new BCryptPasswordEncoder();
-//    }
-
 //    @Override
 //    public boolean signIn(SignInForm form) {
 ////        Optional<User> user = usersRepository.findUserByEmail(form.getEmail());

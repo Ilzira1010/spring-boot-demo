@@ -49,9 +49,7 @@ public class MailsServiceImpl implements MailsService {
     @Override
     public void sendEmailForConfirm(String email, String code) {
         String mailText = getEmailText(code);
-
         MimeMessagePreparator messagePreparator = getEmail(email, mailText);
-
         javaMailSender.send(messagePreparator);
     }
 
@@ -86,7 +84,8 @@ public class MailsServiceImpl implements MailsService {
     public Boolean isConfirmed(String code){
         Optional<User> user = usersRepository.findByConfirmCode(code);
         if (user.isPresent()) {
-            user.get().setConfirmCode(code);
+//            user.get().setConfirmCode(code);
+            user.get().setState(State.CONFIRMED);
             usersRepository.save(user.get());
             return Boolean.TRUE;
         }

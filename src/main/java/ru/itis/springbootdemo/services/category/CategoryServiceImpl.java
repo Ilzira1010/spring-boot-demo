@@ -27,19 +27,4 @@ public class CategoryServiceImpl implements CategoryService {
         return CategoryDto.from(categoryRepository.findAll());
     }
 
-//    @Override
-//    public Optional<Category> getById(long id) {
-//        return categoryRepository.getById(id);
-//    }
-//    @Override
-//    public CategoryDto getById (long id) {
-//
-//        Category category = categoryRepository.findById(id);
-//        return CategoryDto.from(category);
-//    }
-//    @Override
-//    public UserDto getUserById(Long userId) {
-//        Optional<User> user = usersRepository.findById(userId);
-//        return UserDto.from(user.orElse(User.builder().build()));
-//    }
 }

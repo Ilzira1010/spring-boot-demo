@@ -17,16 +17,11 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String getProfilePage(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
-//        String email = userDetails.getUsername();
-//        model.addAttribute("email", email);
-        model.addAttribute("podcasts", podcastService.getAll());
+        String email = userDetails.getUsername();
+        model.addAttribute("email", email);
+        model.addAttribute("podcasts", podcastService.getAllByUser(userDetails.getUser()));
         return "profile";
     }
 
-//    @GetMapping("/profile")
-//    public String getPodcastsPage(Model model) {
-//        model.addAttribute("podcasts", podcastService.getAll());
-//        return "profile";
-//    }
 
 }

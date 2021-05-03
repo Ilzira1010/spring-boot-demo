@@ -19,8 +19,8 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return Collections.singleton(new SimpleGrantedAuthority(user.getRole().toString()));
-        return Collections.singletonList(new SimpleGrantedAuthority("USER"));
+        return Collections.singleton(new SimpleGrantedAuthority(user.getRole().toString()));
+//        return Collections.singletonList(new SimpleGrantedAuthority("USER"));
     }
 
     @Override
@@ -50,6 +50,10 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return user.getState().equals(State.NOT_CONFIRMED);
+        return user.getState().equals(State.CONFIRMED);
+    }
+
+    public User getUser() {
+        return user;
     }
 }

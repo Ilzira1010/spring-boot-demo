@@ -1,4 +1,4 @@
-//package ru.itis.springbootdemo.security;
+package ru.itis.springbootdemo.security;//package ru.itis.springbootdemo.security;
 //
 //
 //import org.springframework.beans.factory.annotation.Autowired;

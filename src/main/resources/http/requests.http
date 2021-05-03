@@ -1,6 +1,15 @@
-GET localhost:80/users/11
+GET localhost:80/users/1
+###
+GET localhost:80/podcasts/3
+###
+GET localhost/users
+###
 
 ###
-GET http://localhost/papers/search?page=0&size=4&q=не&sort=title
+###
+OPTIONS http://localhost:80/users
+
+#GET http://localhost/papers/search?page=0&size=2&q=не&sort=title
 
 ###
+GET http://localhost:8080/main/search?page=0&size=2&q=e&sort=title

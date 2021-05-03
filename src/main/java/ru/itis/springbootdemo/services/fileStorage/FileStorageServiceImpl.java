@@ -4,6 +4,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import ru.itis.springbootdemo.models.FileInfo;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
@@ -26,7 +28,7 @@ public class FileStorageServiceImpl implements FileStorageService {
     private String storagePath;
 
     @Override
-    public String saveFile(MultipartFile uploadingFile) {
+    public Long saveFile(MultipartFile uploadingFile) {
 
         String storageName = UUID.randomUUID().toString() + "." +
                 FilenameUtils.getExtension(uploadingFile.getOriginalFilename());
@@ -45,12 +47,12 @@ public class FileStorageServiceImpl implements FileStorageService {
             throw new IllegalStateException(e);
         }
         filesInfoRepository.save(file);
-        return file.getStorageFileName();
+        return file.getId();
     }
 
     @Override
-    public void writeFileToResponse(String fileName, HttpServletResponse response) {
-        FileInfo fileInfo = filesInfoRepository.findByAndStorageFileName(fileName);
+    public void writeFileToResponse(Long id, HttpServletResponse response) {
+        FileInfo fileInfo = filesInfoRepository.findById(id).orElse(null);
         response.setContentType(fileInfo.getType());
         try {
             IOUtils.copy(new FileInputStream(fileInfo.getUrl()), response.getOutputStream());
@@ -59,4 +61,5 @@ public class FileStorageServiceImpl implements FileStorageService {
             throw new IllegalArgumentException(e);
         }
     }
+
 }

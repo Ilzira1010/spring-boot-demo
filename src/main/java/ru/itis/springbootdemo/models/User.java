@@ -22,6 +22,8 @@ public class User {
     private String hashPassword;
     private String phone;
 
+    private Boolean isDeleted;
+
     @Enumerated(value = EnumType.STRING)
     private State state;
 

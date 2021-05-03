@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="/css/bootstrap.min.css"/>" rel="stylesheet" id="bootstrap-css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <title>Main</title>
 </head>
 <body>
@@ -23,11 +23,8 @@
                     <a class="nav-link" href="/profile">My profile</a>
                 </li>
             </ul>
-            <#if test="${user == null}">
-                <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/signIn'">Sign In</button>
-                <button class="btn btn-primary my-2 my-sm-0 ml-3 mr-3" onclick="location.href='/signUp'">Sign Up</button>
-            </#if>
-            <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/search>'">Search</button>
+
+            <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/podcasts'">Search</button>
         </div>
     </nav>
 </header>

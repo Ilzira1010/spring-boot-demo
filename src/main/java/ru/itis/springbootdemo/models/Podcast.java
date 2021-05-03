@@ -1,9 +1,6 @@
 package ru.itis.springbootdemo.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,6 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Entity
+@Getter
 @Table(name ="podcasts")
 public class Podcast {
     @Id
@@ -24,8 +22,8 @@ public class Podcast {
     private User user;
 
     private String title;
-    private String img;
-    private String track;
+    private Long img;
+    private Long track;
     private Date created_at;
 
     @ManyToOne
@@ -33,4 +31,7 @@ public class Podcast {
     private Category category;
 
 //    private String search;
+
+    // --------------------------
+
 }

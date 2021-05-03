@@ -5,17 +5,20 @@ import ru.itis.springbootdemo.dto.UserDto;
 import ru.itis.springbootdemo.models.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UsersService {
 //    Optional<UserDto> getUserByEmail(String email);
 //    List<User> getAll();
 //    void addUser(User user);
 
-        List<UserDto> getAllUsers();
+    List<UserDto> getAllUsers();
 
     UserDto getUserById(Long userId);
 
-    UserDto addUser(SignUpForm signUpForm);
+    UserDto addUser(UserDto user);
+
+    UserDto updateUser(Long userId, UserDto user);
+
+    void deleteUser(Long userId);
 }
 

@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <title>Main</title>
 </head>
 <body>
@@ -23,45 +23,42 @@
                     <a class="nav-link" href="/profile">My profile</a>
                 </li>
             </ul>
+
             <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/podcasts'">Search</button>
         </div>
     </nav>
 </header>
-<main>
-    <button class="btn btn-primary m-3" onclick="location.href='/create'">Create Podcast</button>
-    <button class="btn btn-primary m-3" onclick="location.href='/logout'">Sign Out</button> <#-- название локейшена из /quit в /main-->
-    <div class="container">
-        <h2 class="text-center">My Podcasts</h2>
-        <#list podcasts as p>
-            <div class="card container m-3">
-                <div class="row">
-                    <div class="col-lg-3 p-0">
-                        <img class="card-img-top img-fluid" src="/img/${p.getImg()}" alt="Image of podcast">
-                    </div>
-                    <div class="col-lg-9">
+<div class="container">
+    <section class="mt-5 mb-4">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-8 align-self-center">
+                <div class="card wish-list mb-4">
+                    <div class="card">
                         <div class="card-body">
-                            <h2 class="card-text podcast-title title">${p.getTitle()}</h2>
-                            <h3 class="card-text podcast-title category">Category: <span>${p.getCategory().getName()}</span></h3>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">${p.getUser().getNickname()} / ${p.getCreated_at()}</p>
-                            <div class="container-audio">
-                                <audio controls preload="auto" id="audio">
-                                    <source src="/track/${p.getTrack()}" type="audio/ogg">
-                                    Your browser dose not Support the audio Tag
-                                </audio>
-                            </div>
+                            <h3 class="mb-4 text-black-80 mt-0 font-weight-bold">Edit</h3>
+                            <#--                            <#if test="${error != null}">-->
+                            <#--                                <h4 class="error-message" id="error-message">${error}</h4>-->
+                            <#--                            </#if>-->
+                            <h4 class="error-message" id="error-message"></h4>
+                            <hr>
+                            <form action="/edit/${podcast.getId()}" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label>Title
+                                        <input name="title" type="text" class="form-control" placeholder="Title"
+                                               required>
+                                    </label>
+                                </div>
+                                <button class="btn btn-primary" type="submit">edit</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="button-container mb-2 w-50 ml-2">
-                <a class="btn btn-success mx-2 w-25" href='/edit/${p.getId()}'>Edit</a>
-                <a class="btn btn-danger mx-2 w-25" href='/delete/${p.getId()}'>Delete</a>
-            </div>
-        </#list>
-    </div>
-</main>
+            <div class="col"></div>
+        </div>
+    </section>
+</div>
 <footer class="footer navbar-fixed-bottom font-small pt-4">
     <hr>
     <div class="container">
@@ -92,5 +89,3 @@
 <script src="/js/bootstrap.bundle.js"></script>
 </body>
 </html>
-
-

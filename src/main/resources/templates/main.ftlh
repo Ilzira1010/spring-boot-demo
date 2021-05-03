@@ -23,9 +23,10 @@
                     <a class="nav-link" href="/profile">My profile</a>
                 </li>
             </ul>
-<#--            <#if test="${user == null}">-->
+            <#if !user?? >
                 <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/signIn'">Sign In</button>
                 <button class="btn btn-primary my-2 my-sm-0 ml-3 mr-3" onclick="location.href='/signUp'">Sign Up</button>
+            </#if>
             <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/podcasts'">Search</button>
         </div>
     </nav>
@@ -35,21 +36,21 @@
         <#list podcasts as p>
             <div class="card container m-3">
                 <div class="row">
-<#--                    <div class="col-lg-3 p-0">-->
-<#--                        <img class="card-img-top img-fluid" src="/img?name=${p.getImg()}" alt="Image of podcast">-->
-<#--                    </div>-->
+                    <div class="col-lg-3 p-0">
+                        <img class="card-img-top img-fluid" src="/img/${p.getImg()}" alt="Image of podcast">
+                    </div>
                     <div class="col-lg-9">
                         <div class="card-body">
                             <h2 class="card-text podcast-title title">${p.getTitle()}</h2>
                             <h3 class="card-text podcast-title category">Category: <span>${p.getCategory().getName()}</span></h3>
                         </div>
                         <div class="card-body">
-<#--                            <p class="card-text">${p.getUser().getNickname()} / ${p.getCreated_at()}</p>-->
+                            <p class="card-text">${p.getUser().getNickname()} / ${p.getCreated_at()}</p>
                             <div class="container-audio">
-<#--                                <audio controls preload="auto" id="audio">-->
-<#--                                    <source src="/track?name=${p.getTrack()}" type="audio/ogg">-->
-<#--                                    Your browser dose not Support the audio Tag-->
-<#--                                </audio>-->
+                                <audio controls preload="auto" id="audio">
+                                    <source src="/track/${p.getTrack()}" type="audio/ogg">
+                                    Your browser dose not Support the audio Tag
+                                </audio>
                             </div>
                         </div>
                     </div>
@@ -57,6 +58,8 @@
             </div>
         </#list>
     </div>
+    <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/main?page=${previous_page}&size=1'">previous</button>
+    <button class="btn btn-primary my-2 my-sm-0" onclick="location.href='/main?page=${next_page}&size=1'">next</button>
 </main>
 <footer class="footer navbar-fixed-bottom font-small pt-4">
     <hr>
