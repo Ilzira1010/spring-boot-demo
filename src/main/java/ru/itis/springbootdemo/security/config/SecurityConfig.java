@@ -42,17 +42,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/podcast").permitAll()
                 .antMatchers("/podcast_specific").permitAll()
 //               .antMatchers("/**").authenticated()
-                .antMatchers("/users").permitAll()
+//                .antMatchers("/users").permitAll()
                 .antMatchers("/profile").authenticated()
 //                .antMatchers("/profile").permitAll()
                 .antMatchers("/create").authenticated()
+                .antMatchers("/users/**").hasAnyAuthority("USER")  //i
                 .and()
                 .formLogin()
                 .loginPage("/signIn")
                 .usernameParameter("email")
                 .defaultSuccessUrl("/profile", true)
 
-                .failureUrl("/signIn?error").permitAll();
+                .failureUrl("/signIn?error")
+        .and().exceptionHandling().accessDeniedPage("/error403"); //i
 //                   .and()
 //                   .logout()
 //                   .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
